@@ -57,7 +57,7 @@ class EyeRubCounter:
 class ReportGenerator(ABC):
     @abstractmethod
     def generate_report(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        raise NotImplemented
+        raise NotImplementedError
 
 
 class EyeRubReportGenerator(ReportGenerator):
