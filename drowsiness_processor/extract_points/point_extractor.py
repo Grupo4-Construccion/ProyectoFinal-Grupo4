@@ -32,6 +32,7 @@ class PointsExtractor:
             #logger.warning("Face mesh: failed, no drowsiness_features recognition.")
             return face_points, False, draw_sketch
 
-    def merge_points(self, face_points: dict, hands_points: dict) -> dict:
+    @staticmethod
+    def merge_points(face_points: dict, hands_points: dict) -> dict:
         merged_points = {**face_points, **hands_points}
         return merged_points
