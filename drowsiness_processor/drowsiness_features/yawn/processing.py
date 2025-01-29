@@ -7,7 +7,7 @@ from drowsiness_processor.drowsiness_features.processor import DrowsinessProcess
 class Detector(ABC):
     @abstractmethod
     def detect(self, mouth_distance: dict) -> bool:
-        raise NotImplemented
+        raise NotImplementedError("Este método debe ser implementado por una subclase")
 
 
 class YawnDetection(Detector):

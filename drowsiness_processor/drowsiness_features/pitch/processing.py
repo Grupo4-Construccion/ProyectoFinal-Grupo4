@@ -7,7 +7,7 @@ from drowsiness_processor.drowsiness_features.processor import DrowsinessProcess
 class Detector(ABC):
     @abstractmethod
     def detect(self, head_distances: dict) -> Tuple[bool, str]:
-        raise NotImplemented
+        raise NotImplementedError("Este método debe ser implementado por una subclase")
 
 
 class PitchDetection(Detector):
@@ -95,7 +95,7 @@ class PitchEstimator(DrowsinessProcessor):
         self.pitch_report_generator = PitchReportGenerator()
 
     def process(self, head_points: dict):
-        head_down, head_position = self.pitch_detection.check_head_down(head_points)
+        head_down, _ = self.pitch_detection.check_head_down(head_points)
         is_pitch, duration_pitch = self.pitch_detection.detect(head_down)
         if is_pitch:
             self.pitch_counter.increment(duration_pitch)
@@ -111,7 +111,7 @@ class PitchEstimator(DrowsinessProcessor):
             return self.pitch_report_generator.generate_report(pitch_data)
 
         return {
-            'pitch_count': f'Counting pitches...',
+            'pitch_count': 'Counting pitches...',
             'pitch_report': False,
             'head_down': head_down
         }

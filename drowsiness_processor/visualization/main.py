@@ -140,6 +140,7 @@ class ReportVisualizer:
         x, y = new_coordinates
         y = y + self.margin
         if position == 5:
+            # TODO: Agregar lógica específica para la posición 5
             pass
         else:
             coordinates[position+1] = (x, y)

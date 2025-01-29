@@ -34,7 +34,7 @@ class HandsExtractor:
         chose_hand = hands_info.multi_hand_landmarks[hand_index]
         hands_points = [
             [i, int(pt.x * w), int(pt.y * h)]
-            for hand in hands_info.multi_hand_landmarks
+            for _ in hands_info.multi_hand_landmarks
             for i, pt in enumerate(chose_hand.landmark)
         ]
         return hands_points

@@ -7,7 +7,7 @@ from drowsiness_processor.drowsiness_features.processor import DrowsinessProcess
 class Detector(ABC):
     @abstractmethod
     def detect(self, eyes_distance: dict) -> bool:
-        raise NotImplemented
+        raise NotImplementedError("Este método debe ser implementado por una subclase")
 
 
 class FlickerDetection(Detector):
@@ -147,8 +147,6 @@ class FlickerEstimator(DrowsinessProcessor):
         is_micro_sleep, duration_micro_sleep = self.micro_sleep_detector.detect(closed_eyes)
         if is_micro_sleep:
             self.micro_sleep_counter.increment(duration_micro_sleep)
-
-        micro_sleep = self.micro_sleep_counter.micro_sleep_count
 
         if elapsed_time >= 60:
             flicker_data = {
