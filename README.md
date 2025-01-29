@@ -83,6 +83,37 @@ Para garantizar un código limpio y seguro, utilizamos:
 
 ---
 
+## Pruebas Automáticas con GitHub Actions
+El proyecto cuenta con un conjunto de **pruebas unitarias** escritas en `unittest` para validar las funcionalidades clave, asegurando que los cambios en el código no introduzcan errores inesperados.
+
+### Configuración de GitHub Actions
+Hemos configurado un workflow en `.github/workflows/python-app.yml` que ejecuta automáticamente las pruebas en cada `push` y `pull request` al repositorio.
+
+### Configuración de Pytest
+Se ha configurado `pytest` para el manejo de pruebas asíncronas mediante el archivo `pytest.ini`, que contiene la siguiente configuración:
+```ini
+[pytest]
+asyncio_mode = auto
+```
+Esto permite ejecutar pruebas que involucran operaciones asíncronas de manera eficiente, asegurando la correcta validación del código sin bloqueos innecesarios.
+
+### Ejecución de Pruebas
+Las pruebas incluyen:
+- **Generación de reportes de somnolencia** (`DrowsinessReports`)
+- **Procesamiento de características de somnolencia** (`FeaturesDrowsinessProcessing`)
+- **Detección de frotamiento de ojos** (`EyeRubDetection`)
+- **Contador y reportes de frotamiento de ojos** (`EyeRubCounter`, `EyeRubReportGenerator`)
+
+Ejemplo de ejecución manual de pruebas:
+```bash
+python -m unittest discover tests/
+```
+También se pueden ejecutar las pruebas con `pytest` de la siguiente manera:
+```bash
+pytest tests/
+```
+---
+
 ## Créditos y Autores
 - **Basado en:** [driver_fatigue_detection](https://github.com/AprendeIngenia/driver_fatigue_detection) de AprendeIngenia.
 - **Modificado y mejorado por:**
