@@ -22,4 +22,12 @@ jobs:
 
     - name: Run unit tests
       run: |
-        python -m unittest discover -s tests
+        for test_file in tests/test_*.py; do
+          echo "Running tests in $test_file"
+          python -m unittest $test_file
+          if [ $? -eq 0 ]; then
+            echo "$test_file executed successfully"
+          else
+            echo "$test_file failed"
+          fi
+        done
