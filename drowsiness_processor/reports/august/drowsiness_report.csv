@@ -125,3 +125,5 @@ timestamp,eye_rub_first_hand_report,eye_rub_first_hand_count,eye_rub_first_hand_
 2025-01-29 14:58:38,False,0,[],|,False,0,[],|,False,Counting flickers... 37.0 seconds remaining.,|,False,0,[],|,True,1,['1 pitch: 6.0 seconds'],|,False,Counting yawns... 157.0 seconds remaining.,[]
 2025-01-29 14:58:55,False,0,[],|,False,0,[],|,False,Counting flickers... 19.0 seconds remaining.,|,False,0,[],|,True,2,"['1 pitch: 6.0 seconds', '2 pitch: 6.0 seconds']",|,False,Counting yawns... 139.0 seconds remaining.,[]
 2025-01-29 14:59:02,False,0,[],|,False,0,[],|,False,Counting flickers... 13.0 seconds remaining.,|,False,0,[],|,True,3,"['1 pitch: 6.0 seconds', '2 pitch: 6.0 seconds', '3 pitch: 4.0 seconds']",|,False,Counting yawns... 133.0 seconds remaining.,[]
+2025-01-29 15:19:42,False,0,[],|,False,0,[],|,False,0,|,True,1,['1 micro sleep: 2.0 seconds'],|,False,Counting pitches...,[],|,False,Counting yawns... 169.0 seconds remaining.,[]
+2025-01-29 15:19:43,False,0,[],|,False,0,[],|,False,Counting flickers... 47.0 seconds remaining.,|,False,0,[],|,True,1,['1 pitch: 6.0 seconds'],|,False,Counting yawns... 167.0 seconds remaining.,[]
