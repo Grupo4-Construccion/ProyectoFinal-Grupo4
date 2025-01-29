@@ -158,10 +158,9 @@ class ReportVisualizer:
             self.visualize_reports[feature]['report'] = report
             self.visualize_reports[feature]['count'] = counter
 
-        if feature != 'flicker':
-            if report:
-                durations = data[f'{base_feature}_durations']
-                self.visualize_reports[feature]['durations'] = durations
+        if feature != 'flicker' and report:
+            durations = data[f'{base_feature}_durations']
+            self.visualize_reports[feature]['durations'] = durations
 
     def visualize_all_reports(self, sketch: np.ndarray, report_data: dict):
         # first hand
