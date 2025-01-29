@@ -28,7 +28,8 @@ class FaceMeshExtractor:
             'head': {'distances': []},
         }
 
-    def extract_points(self, face_image: np.ndarray, face_mesh_info: Any) -> List[List[int]]:
+    @staticmethod
+    def extract_points(face_image: np.ndarray, face_mesh_info: Any) -> List[List[int]]:
         h, w, _ = face_image.shape
         mesh_points = [
             [i, int(pt.x * w), int(pt.y * h)]
@@ -80,7 +81,8 @@ class FaceMeshDrawer:
             self.mp_draw.draw_landmarks(face_image, face_mesh, mp.solutions.face_mesh.FACEMESH_TESSELATION,
                                         self.config_draw, self.config_draw)
 
-    def draw_sketch(self, face_image: np.ndarray, face_mesh_info: Any):
+    @staticmethod
+    def draw_sketch(face_image: np.ndarray, face_mesh_info: Any):
         h, w, _ = face_image.shape
         black_image = np.zeros((h, w, 3), dtype=np.uint8)
         for face_mesh in face_mesh_info.multi_face_landmarks:

@@ -26,10 +26,12 @@ class HandsExtractor:
             'fingers': {'distances': []},
         }
 
-    def count_hands(self, hands_info):
+    @staticmethod
+    def count_hands(hands_info):
         return len(hands_info.multi_hand_landmarks)
 
-    def extract_points(self, face_image: np.ndarray, hands_info: Any, hand_index: int = 0) -> List[List[int]]:
+    @staticmethod
+    def extract_points(face_image: np.ndarray, hands_info: Any, hand_index: int = 0) -> List[List[int]]:
         h, w, _ = face_image.shape
         chose_hand = hands_info.multi_hand_landmarks[hand_index]
         hands_points = [

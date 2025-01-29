@@ -41,11 +41,13 @@ class ReportVisualizer:
         self.spacing: int = 80
         self.margin: int = 40
 
-    def draw_rectangle(self, sketch: np.ndarray, top_left: Tuple[int, int], bottom_right: Tuple[int, int],
+    @staticmethod
+    def draw_rectangle(sketch: np.ndarray, top_left: Tuple[int, int], bottom_right: Tuple[int, int],
                        color: Tuple[int, int, int]):
         cv2.rectangle(sketch, top_left, bottom_right, color, 2)
 
-    def get_color(self, report_status: str) -> Tuple[int, int, int]:
+    @staticmethod
+    def get_color(report_status: str) -> Tuple[int, int, int]:
         if report_status == 'waiting':
             return 180, 180, 180
         elif report_status == 'warning':
@@ -55,7 +57,8 @@ class ReportVisualizer:
         elif report_status == 'normal':
             return 0, 255, 0
 
-    def draw_report_text(self, sketch: np.ndarray, text: str, position: Tuple[int, int], color: Tuple[int, int, int]):
+    @staticmethod
+    def draw_report_text(sketch: np.ndarray, text: str, position: Tuple[int, int], color: Tuple[int, int, int]):
         cv2.putText(sketch, text, position, cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 1)
 
     def draw_warnings_general(self, sketch: np.ndarray, feature: str):

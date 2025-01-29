@@ -60,7 +60,8 @@ class DrowsinessReports:
                 writer = csv.DictWriter(file, fieldnames=self.fields)
                 writer.writerow(row)
 
-    def generate_json_report(self, report_data: dict) -> str:
+    @staticmethod
+    def generate_json_report(report_data: dict) -> str:
         report_json = {
             'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
             'eye_rub_first_hand': {
