@@ -1,0 +1,15 @@
+{
+  "name": "proyectofinal-grupo4",
+  "version": "1.0.0",
+  "description": "Proyecto Final - Construcción y Evolución de Software",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo 'No tests configured yet' && exit 0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
