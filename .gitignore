@@ -1,0 +1,30 @@
+# Ignorar entornos virtuales
+venv/
+env/
+
+# Ignorar cachés de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar logs
+*.log
+*.out
+*.err
+
+# Ignorar configuraciones del IDE (PyCharm, VSCode, etc.)
+.vscode/
+.idea/
+
+# Ignorar archivos de dependencias generados
+Pipfile.lock
+poetry.lock
+
+# Ignorar credenciales y configuraciones privadas
+.env
+secrets.json
+
+# Ignorar archivos de Docker si los usas
+docker-compose.override.yml
+
