@@ -1,11 +1,16 @@
 import numpy as np
 import cv2
 import time
+import pygame
 from typing import Tuple
+import os
+import threading
 
 
 class ReportVisualizer:
     def __init__(self):
+        self.alarm_sound = os.path.join(os.path.dirname(__file__), "alarma.wav")
+
         self.coordinates = {
             'eye_rub_first_hand': (10, 20),
             'eye_rub_second_hand': (10, 100),
@@ -41,13 +46,24 @@ class ReportVisualizer:
         self.spacing: int = 80
         self.margin: int = 40
 
+    def play_alarm(self):
+        def sound():
+            pygame.mixer.init()
+            pygame.mixer.music.set_volume(1.0)  # Máximo volumen
+            pygame.mixer.music.load(self.alarm_sound)
+            pygame.mixer.music.play()
+            time.sleep(3)  # ⏳ Espera 3 segundos, pero sin bloquear el programa
+
+        alarm_thread = threading.Thread(target=sound)
+        alarm_thread.start()  # 🚀 Iniciar la alarma en un hilo separado
+
+
     @staticmethod
     def draw_rectangle(sketch: np.ndarray, top_left: Tuple[int, int], bottom_right: Tuple[int, int],
                        color: Tuple[int, int, int]):
         cv2.rectangle(sketch, top_left, bottom_right, color, 2)
 
-    @staticmethod
-    def get_color(report_status: str) -> Tuple[int, int, int]:
+    def get_color(self, report_status: str) -> Tuple[int, int, int]:
         if report_status == 'waiting':
             return 180, 180, 180
         elif report_status == 'warning':
@@ -102,9 +118,11 @@ class ReportVisualizer:
         if feature in ('micro_sleep', 'pitch'):
             if feature_count >= warning_threshold:
                 color = self.get_color('alarm')
+                self.play_alarm()
         else:
             if feature_count > warning_threshold:
                 color = self.get_color('warning')
+                self.play_alarm()
             else:
                 color = self.get_color('normal')
 
