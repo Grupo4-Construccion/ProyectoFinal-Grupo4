@@ -1,0 +1,69 @@
+@startuml
+    class Main {
+        +run()
+        +initialize_system()
+    }
+
+    class DataProcessing {
+        +process_data()
+    }
+
+    class EyesProcessing {
+        +detect_eye_closure()
+        +analyze_blink_rate()
+    }
+
+    class HandsProcessing {
+        +detect_hand_movements()
+        +process_hand_data()
+    }
+
+    class HeadProcessing {
+        +detect_head_tilt()
+        +analyze_head_position()
+    }
+
+    class MouthProcessing {
+        +detect_yawning()
+        +analyze_mouth_activity()
+    }
+
+    class DrowsinessFeatureProcessor {
+        +analyze_drowsiness_signs()
+        +compute_drowsiness_index()
+    }
+
+    class PointExtractor {
+        +extract_facial_landmarks()
+        +extract_hand_landmarks()
+    }
+
+    class ReportGenerator {
+        +create_report()
+        +export_to_csv()
+    }
+
+    class Visualization {
+        +generate_graphs()
+        +display_realtime_analysis()
+    }
+
+    ' Relaciones entre clases
+    DrowsinessFeatureProcessor --> ReportGenerator : genera
+    DrowsinessFeatureProcessor --> Visualization : visualiza
+
+    ' Relaciones de herencia
+    EyesProcessing --|> DataProcessing
+    HandsProcessing --|> DataProcessing
+    HeadProcessing --|> DataProcessing
+    MouthProcessing --|> DataProcessing
+
+    DataProcessing --> DrowsinessFeatureProcessor
+    Main --> PointExtractor
+    PointExtractor -r-> DataProcessing
+
+    ReportGenerator --> Visualization : muestra reporte
+
+
+
+@enduml

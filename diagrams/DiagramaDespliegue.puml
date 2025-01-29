@@ -1,0 +1,21 @@
+@startuml
+
+node "Usuario" {
+    [Cliente Web o App]
+}
+
+node "Servidor" {
+    [Aplicación Flask]
+    [Procesamiento de Datos]
+}
+
+node "Base de Datos" {
+    [Almacén de Reportes]
+}
+
+"Cliente Web o App" --> "Aplicación Flask" : Solicita análisis
+"Aplicación Flask" --> "Procesamiento de Datos" : Enviar datos de usuario
+"Procesamiento de Datos" --> "Base de Datos" : Guardar reportes
+"Aplicación Flask" --> "Cliente Web o App" : Enviar resultados
+
+@enduml

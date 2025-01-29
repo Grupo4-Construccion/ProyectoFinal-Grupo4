@@ -1,0 +1,20 @@
+@startuml
+
+actor Usuario
+participant "Main" as Main
+participant "DataProcessing" as DataProcessing
+participant "EyesProcessing" as EyesProcessing
+participant "DrowsinessFeatureProcessor" as DrowsinessFeatureProcessor
+participant "ReportGenerator" as ReportGenerator
+participant "Visualization" as Visualization
+
+Usuario -> Main : Inicia análisis de somnolencia
+Main -> DataProcessing : Procesar datos
+DataProcessing -> EyesProcessing : Detectar cierre de ojos
+EyesProcessing -> DrowsinessFeatureProcessor : Enviar datos de fatiga
+DrowsinessFeatureProcessor -> ReportGenerator : Generar informe
+DrowsinessFeatureProcessor -> Visualization : Mostrar datos en pantalla
+ReportGenerator -> Usuario : Mostrar informe generado
+Visualization -> Usuario : Mostrar visualización en tiempo real
+
+@enduml
