@@ -1,6 +1,5 @@
 import unittest
 import time
-from drowsiness_processor.drowsiness_features.processor import DrowsinessProcessor
 from drowsiness_processor.drowsiness_features.eye_rub.processing import EyeRubDetection, EyeRubCounter, EyeRubReportGenerator, EyeRubEstimator  # Reemplaza "your_module" con el nombre real del archivo
 
 class TestEyeRubDetection(unittest.TestCase):
