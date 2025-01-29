@@ -20,16 +20,10 @@ class PointsExtractor:
             hands_points, hands_success, draw_sketch = self.hands.process(face_image, draw_sketch, draw=True)
             if hands_success:
                 merged_points = self.merge_points(face_points, hands_points)
-                #logger.info(
-                #    "Face mesh: successful.\nHands detect: succesfull. \nExtract: blinks, microsleeps, yawning, "
-                #    "nodding, eye rubbing")
                 return merged_points, True, draw_sketch
             else:
-                #logger.info(
-                #    "Face mesh: successful.\nHands detect: failed. \nExtract: blinks, microsleeps, yawning, nodding")
                 return face_points, True, draw_sketch
         else:
-            #logger.warning("Face mesh: failed, no drowsiness_features recognition.")
             return face_points, False, draw_sketch
 
     @staticmethod
