@@ -67,12 +67,12 @@ class ReportVisualizer:
         if feature in ('micro_sleep', 'pitch'):
             if feature == 'micro_sleep':
                 self.draw_report_text(sketch,
-                                      f"evaluating: {feature.replace('_', ' ')}: stay alert",
+                                      f"evaluando: {feature.replace('_', ' ')}: mantente alerta",
                                       position, color)
 
             if feature == 'pitch':
                 self.draw_report_text(sketch,
-                                      f"evaluating: {feature.replace('_', ' ')}: stay alert",
+                                      f"evaluando: {feature.replace('_', ' ')}: mantente alerta",
                                       position, color)
         else:
             current_time = time.time()
@@ -81,17 +81,17 @@ class ReportVisualizer:
 
             if feature in ('eye_rub_first_hand', 'eye_rub_second_hand'):
                 self.draw_report_text(sketch,
-                                      f"counting: {feature.replace('_', ' ')}: {300 - elapsed_time} seconds remaining",
+                                      f"contando: {feature.replace('_', ' ')}: {300 - elapsed_time} segundos restantes",
                                       position, color)
 
             if feature == 'flicker':
                 self.draw_report_text(sketch,
-                                      f"counting: {feature.replace('_', ' ')}: {60 - elapsed_time} seconds remaining",
+                                      f"contando: {feature.replace('_', ' ')}: {60 - elapsed_time} segundos restantes",
                                       position, color)
 
             if feature == 'yawn':
                 self.draw_report_text(sketch,
-                                      f"counting: {feature.replace('_', ' ')}: {180 - elapsed_time} seconds remaining",
+                                      f"contando: {feature.replace('_', ' ')}: {180 - elapsed_time} segundos restantes",
                                       position, color)
 
     def draw_warnings_report(self, sketch: np.ndarray, feature: str):
