@@ -63,6 +63,7 @@ class ReportVisualizer:
                        color: Tuple[int, int, int]):
         cv2.rectangle(sketch, top_left, bottom_right, color, 2)
 
+    @staticmethod
     def get_color(self, report_status: str) -> Tuple[int, int, int]:
         if report_status == 'waiting':
             return 180, 180, 180
