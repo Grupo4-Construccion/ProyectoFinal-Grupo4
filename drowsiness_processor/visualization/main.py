@@ -64,7 +64,7 @@ class ReportVisualizer:
     def draw_warnings_general(self, sketch: np.ndarray, feature: str):
         position = self.coordinates[feature]
         color = self.get_color('waiting')
-        if feature == 'micro_sleep' or feature == 'pitch':
+        if feature in ('micro_sleep', 'pitch'):
             if feature == 'micro_sleep':
                 self.draw_report_text(sketch,
                                       f"evaluating: {feature.replace('_', ' ')}: stay alert",
@@ -79,7 +79,7 @@ class ReportVisualizer:
             start_time_feature = self.times[feature]
             elapsed_time = round(current_time - start_time_feature, 0)
 
-            if feature == 'eye_rub_first_hand' or feature == 'eye_rub_second_hand':
+            if feature in ('eye_rub_first_hand', 'eye_rub_second_hand'):
                 self.draw_report_text(sketch,
                                       f"counting: {feature.replace('_', ' ')}: {300 - elapsed_time} seconds remaining",
                                       position, color)
@@ -99,7 +99,7 @@ class ReportVisualizer:
         feature_count = self.visualize_reports[feature]['count']
         warning_threshold = self.warnings[feature]
 
-        if feature == 'micro_sleep' or feature == 'pitch':
+        if feature in ('micro_sleep', 'pitch'):
             if feature_count >= warning_threshold:
                 color = self.get_color('alarm')
         else:
