@@ -3,9 +3,12 @@ import base64
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from drowsiness_processor.main import DrowsinessDetectionSystem
 
-
 app = FastAPI()
 
+# Ruta raíz para evitar el error 404
+@app.get("/")
+def home():
+    return {"message": "El servidor está funcionando correctamente"}
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
@@ -34,5 +37,4 @@ async def websocket_endpoint(websocket: WebSocket):
             })
 
     except WebSocketDisconnect:
-        print("disconnect client")
-
+        print("Cliente desconectado")

@@ -1,68 +1,45 @@
-from flet import *
-from gui.pages.start_page import Start
-from gui.pages.selection_interface_page import SelectionInterface
-from gui.pages.drowsiness_page import Drowsiness
+import cv2
+import base64
+import asyncio
+import websockets
+import json
+import numpy as np
 
 
-class MainApp:
-    def __init__(self, page: Page):
-        self.page = page
-        self.page.title = "Educare ia"
-        self.page.bgcolor = "#fffffe"
-        self.page.window.resizable = False
-        self.page.padding = 0
-        self.page.window.width = 1920
-        self.page.window.height = 1080
-        self.page.vertical_alignment = "center"
-        self.page.horizontal_alignment = "center"
+async def send_video():
+    uri = "ws://localhost:8000/ws"
+    async with websockets.connect(uri) as websocket:
+        cap = cv2.VideoCapture(0)
+        while cap.isOpened():
+            ret, frame = cap.read()
+            if not ret:
+                break
 
-        self.page.theme = Theme(
-            page_transitions=PageTransitionsTheme(
-                android=PageTransitionTheme.FADE_UPWARDS,
-                ios=PageTransitionTheme.CUPERTINO,
-                macos=PageTransitionTheme.ZOOM,
-                linux=PageTransitionTheme.ZOOM,
-                windows=PageTransitionTheme.FADE_UPWARDS,
-            ),
-        )
+            # code frame: JPEG & base64
+            _, buffer = cv2.imencode('.jpg', frame)
+            frame_base64 = base64.b64encode(buffer).decode('utf-8')
 
-        self.start_page = Start(page)
-        self.selection_interface_page = SelectionInterface(page)
-        self.drowsiness_page = Drowsiness(page)
+            # send frame to server
+            await websocket.send(frame_base64)
 
-        self.page.on_route_change = self.route_change
-        self.page.go("/")
+            # receiving frame from server
+            response = await websocket.recv()
+            response_data = json.loads(response)
 
-    def route_change(self, route):
-        self.page.views.clear()
-        if self.page.route == "/":
-            self.page.views.append(
-                View(
-                    route="/",
-                    controls=[self.start_page.main()],
-                )
-            )
+            json_report = response_data.get('json_report')
+            sketch_base64 = response_data.get('sketch_image')
 
-        elif self.page.route == "/selection_interface_page":
-            self.selection_interface_page.main()
-            self.page.views.append(
-                View(
-                    route="/selection_interface_page",
-                    controls=[self.selection_interface_page.main()],
-                )
-            )
+            sketch_data = base64.b64decode(sketch_base64)
+            nparr = np.frombuffer(sketch_data, np.uint8)
+            sketch_image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 
-        elif self.page.route == "/drowsiness_page":
-            self.page.views.append(
-                View(route="/drowsiness_page", controls=[self.drowsiness_page.main()])
-            )
+            cv2.imshow('Drowsiness Detection', sketch_image)
+            print(json_report)
 
-        self.page.update()
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
 
+        cap.release()
+        cv2.destroyAllWindows()
 
-def main(page: Page):
-    MainApp(page)
-
-
-if __name__ == "__main__":
-    app(target=main)
+asyncio.run(send_video())
