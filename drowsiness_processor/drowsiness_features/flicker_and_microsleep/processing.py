@@ -92,7 +92,7 @@ class MicroSleepCounter:
 class ReportGenerator(ABC):
     @abstractmethod
     def generate_report(self, data: dict[str, bool | int | list]) -> Dict[str, Any]:
-        raise NotImplemented
+        raise NotImplementedError
 
 
 class FlickerReportGenerator(ReportGenerator):
